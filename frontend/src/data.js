@@ -153,7 +153,7 @@ const data = [
     "origin": "England",
     "image": "images/12.avif",
     "numberOfReviews": 500,
-    "countInStock": 20
+    "countInStock": 0
   }
 ];
 
