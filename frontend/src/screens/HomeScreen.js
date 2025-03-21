@@ -1,10 +1,23 @@
 import React from 'react'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 import {Row,Col} from 'react-bootstrap'
-import data from '../data'
 import Data from '../components/Data'
 
 
 const HomeScreen = () => {
+  const [data,setData]=useState([]);
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try{
+        const {data}=await axios.get('/api/data');
+        setData(data);
+      }catch(error){
+        console.log("An error occurred while fetching data",error);
+      } 
+    }
+    fetchData();
+  },[])
   return (
     <>
         <h4>Latest Tea</h4>
