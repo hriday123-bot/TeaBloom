@@ -12,6 +12,6 @@ export const updateCart=(state,action)=>{
      //calculate items price
      state.totalPrice=(Number(state.itemsPrice)+Number(state.shippingPrice)+Number(state.taxPrice)).toFixed(2);
      //strong in local storage
-     localStorage.setItem('cartItems',JSON.stringify(state));
+     localStorage.setItem('cart',JSON.stringify(state));
      return state;
 }
