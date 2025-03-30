@@ -77,3 +77,16 @@ table th {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
+
+.dropdown-menu {
+  max-height: 300px; 
+  overflow-y: auto;
+}
+
+.navbar .dropdown-menu {
+  position: absolute;
+  max-width: 100vw; 
+  overflow: hidden; 
+  left: auto;
+  right: 0; 
+}
