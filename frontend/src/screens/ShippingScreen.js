@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {useNavigate} from 'react-router-dom';
 import {saveShippingAddress} from '../slices/cartSlice';
 import CheckoutSteps from "../components/CheckoutSteps";
+import { toast } from "react-toastify";
 
 
 
@@ -22,6 +23,10 @@ const ShippingScreen = () => {
 
 
     const submitHandler = (e) => {
+        if (!address || !city || !postalCode || !country) {
+            toast.error('All fields are required!');
+            return; 
+        }
         e.preventDefault();
         dispatch(saveShippingAddress({address,city,postalCode,country}));
         navigate('/payment');  
