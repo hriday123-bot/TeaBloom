@@ -49,12 +49,10 @@ const PlaceOrderScreen = () => {
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>
-          <Card>
-
-
+          <Card className='card-container'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h4>Shipping</h4>
+                <h3>Shipping</h3>
                 <p>
                   <strong>Address:</strong>
                   {cart.shippingAddress.address},{cart.shippingAddress.city}  {' '}
@@ -95,7 +93,7 @@ const PlaceOrderScreen = () => {
           </Card>
         </Col>
         <Col md={4}>
-          <Card>
+          <Card className='card-container'>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h3>Order Summary</h3>
@@ -122,7 +120,9 @@ const PlaceOrderScreen = () => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
-                  <Col>Total:</Col>
+                  <Col>
+                  <strong>Total:</strong>
+                  </Col>
                   <Col>{cart.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>

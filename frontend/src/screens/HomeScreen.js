@@ -18,7 +18,7 @@ const HomeScreen = () => {
          </Message>
          : (
           <>
-            <h4>Latest Tea</h4>
+            <h3>Latest Tea</h3>
             <Row >
                 {data.map((data)=>(
                     <Col key={data._id} sm={12} md={6} lg={4} xl={3}>
