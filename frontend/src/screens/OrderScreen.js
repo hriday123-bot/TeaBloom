@@ -10,7 +10,7 @@ import {
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery, useDeliverOrderMutation } from '../slices/orderApiSlice';
+import { useGetOrderDetailsQuery, usePayOrderMutation, useGetPayPalClientIdQuery } from '../slices/orderApiSlice';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -20,9 +20,6 @@ const OrderScreen = () => {
     const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId);
 
     const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
-
-    const [deliverOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
-
     const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
     const { userInfo } = useSelector((state) => state.auth);
@@ -74,8 +71,8 @@ const OrderScreen = () => {
         }
         )
     }
-    const onApproveTest = async () => {
-        await payOrder({ orderId, details: { payer: {} } });
+    const onApproveTest = async() => {
+        await payOrder({ orderId, details:{payer:{}} });
         refetch();
         toast.success('Payment Successful');
     }
@@ -83,7 +80,7 @@ const OrderScreen = () => {
     const onError = (error) => {
         toast.error(error.message);
     }
-    const createOrder = (data, actions) => {
+    const createOrder = (data,actions) => {
         return actions.order.create({
             purchase_units: [
                 {
@@ -93,19 +90,7 @@ const OrderScreen = () => {
         }).then((orderId) => {
             return orderId;
         });
-    }
-
-    const deliverOrderHandler = async () => {
-        try {
-            console.log('deliver order',orderId);
-            
-            await deliverOrder(orderId);
-            refetch();
-            toast.success('Order Delivered');
-        } catch (error) {
-            toast.error(error?.data?.message || error.error);
-        }
-    }
+     }
 
     return isLoading ? (<Loader />) : error ? (<Message variant='danger' />) :
         (<>
@@ -205,7 +190,7 @@ const OrderScreen = () => {
                                     <Col>Shipping</Col>
                                     <Col>
                                         {order.shippingPrice === 0 ? (
-                                            <div style={{ color: 'green' }}>FREE</div>
+                                            <div style={{color:'green'}}>FREE</div>
                                         ) : (
                                             `Rs ${order.shippingPrice}`
                                         )}
@@ -233,12 +218,12 @@ const OrderScreen = () => {
                                         <Loader />
                                     ) : (
                                         <div>
-                                            <Button
+                                            {/* <Button
                                                 style={{ marginBottom: '10px' }}
                                                 onClick={onApproveTest}
                                             >
                                                 Test Pay Order
-                                            </Button>
+                                            </Button> */}
 
                                             <div>
                                                 <PayPalButtons
@@ -249,19 +234,7 @@ const OrderScreen = () => {
                                             </div>
                                         </div>
                                     )}
-                                </ListGroup.Item>)}
-                            {loadingDeliver && <Loader />}
-                            {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                                <ListGroup.Item>
-                                    <Button
-                                        type='button'
-                                        className='btn btn-block'
-                                        onClick={deliverOrderHandler}
-                                    >
-                                        Mark As Delivered
-                                    </Button>
                                 </ListGroup.Item>
-
                             )}
 
 
