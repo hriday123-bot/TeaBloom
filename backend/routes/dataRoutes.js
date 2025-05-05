@@ -1,11 +1,10 @@
 import express from 'express';
-import { getData,getDataById,createData,updateData,deleteData } from '../controllers/dataController.js';
-import {protect, admin} from '../middleware/authMiddleware.js';
+import { getData,getDataById } from '../controllers/dataController.js';
 
 const router = express.Router();
 
-router.route('/').get(getData).post(protect, admin, createData);
+router.route('/').get(getData);
 
-router.route('/:id').get(getDataById).put(protect, admin, updateData).delete(protect, admin, deleteData);
+router.route('/:id').get(getDataById);
 
 export default router;

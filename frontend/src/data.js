@@ -143,7 +143,8 @@
 //     "countInStock": 17
 //   },
 //   {
-//     "_id": 12,nb
+//     "_id": 12,
+//     "name": "Earl Grey Tea",
 //     "category": "Black Tea",
 //     "price": 330,
 //     "description": "A black tea flavored with oil of bergamot, giving it a unique and fragrant citrusy aroma.",
