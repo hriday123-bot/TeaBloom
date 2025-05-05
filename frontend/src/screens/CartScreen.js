@@ -29,10 +29,15 @@ const CartScreen = () => {
         <>
           <Row>
             <Col md={8}>
-               <h3 style={{marginBottom: '10px'}}>Shopping Cart</h3>
+               <h3  className="cart-heading">Your Cart Items</h3>
                {cartItems.length=== 0?(
-                <div style={{ marginTop: '20px', width: 'auto' }}>
-                <Message variant="info">Your TeaBloom Cart is <strong>Empty</strong>. Go to <Link to="/">Shop</Link> to buy Tea <FaLeaf/></Message>
+                <div className="empty-cart-container">
+                <Message variant="info">
+                  <div className="empty-cart-message">
+                    Your <strong>TeaBloom</strong> Cart is <strong>Empty</strong>. <br />
+                    Click here <Link to="/" className="shop-link">Shop</Link> to Continue your Shopping <FaLeaf className="leaf-icon" />
+                  </div>
+                </Message>
                 </div>
                ):(
                      <ListGroup variant='flush'>
@@ -68,13 +73,13 @@ const CartScreen = () => {
                )}
             </Col>
             <Col md={4}>
-               <Card style={{marginTop: '40px'}}>
+               <Card className="cart-summary-card">
                   <ListGroup variant="flush">
-                      <ListGroup.Item>
-                          <h5>Subtotal ({cartItems.reduce((acc,item)=>acc+item.qty,0)}) items</h5>
-                          Rs: {cartItems.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}
+                      <ListGroup.Item className="cart-summary-item">
+                          <h5 className="summary-title">Subtotal ({cartItems.reduce((acc,item)=>acc+item.qty,0)}) items</h5>
+                          <div className="summary-total"> Rs: {cartItems.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}</div>
                       </ListGroup.Item>
-                      <ListGroup.Item>
+                      <ListGroup.Item className="cart-summary-item">
                             <Button 
                             type='button' 
                             className='checkout-button' 
